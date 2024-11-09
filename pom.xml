@@ -42,8 +42,8 @@
     </build>
     <distributionManagement>
         <repository>
-            <id>nexus-test-releases</id> <!-- Match this ID with the settings.xml -->
-            <url>http://44.204.157.194:8081/repository/ansible-jenkins-integration/</url>
+            <id>nexus</id> <!-- Match this ID with the settings.xml -->
+            <url>http://54.197.18.124:8081/repository/Ansible-Rohit/</url>
         </repository>
     </distributionManagement>
 </project>
