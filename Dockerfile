@@ -11,4 +11,4 @@ COPY target/simple-java-app-1.0.jar /usr/src/app/simple-java-app.jar
 EXPOSE 8080
 
 # Command to run the JAR file
-CMD ["java", "-jar", "simple-java-app.jar"]
+CMD ["java", "-jar", "/usr/src/app/simple-java-app.jar"]
