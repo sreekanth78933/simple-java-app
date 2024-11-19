@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: simple-java-app
-        image: devopstraining064/project4-demo-dockerimage:33
+        image: rajasekhar3292/demo:02
         ports:
         - containerPort: 8080
