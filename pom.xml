@@ -43,7 +43,7 @@
     <distributionManagement>
         <repository>
             <id>nexus-test-releases</id> <!-- Match this ID with the settings.xml -->
-            <url>http://3.80.152.165:8081/repository/maven-build-package/</url>
+            <url>http://54.221.67.100:8081/repository/jenkins-nexus-integration/</url>
         </repository>
     </distributionManagement>
 </project>
