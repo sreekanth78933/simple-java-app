@@ -3,15 +3,12 @@ kind: Service
 metadata:
   name: simple-java-app-service
   annotations:
-    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"  # Make sure it's internet-facing
 spec:
   selector:
-    app: simple-java-app
+    app: simple-java-app  # Ensure this matches the label in Deployment
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 8080
+      port: 80            # Exposed port
+      targetPort: 8080     # Target container port
   type: LoadBalancer
-
-
-
