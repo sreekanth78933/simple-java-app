@@ -2,16 +2,17 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: app-ingress
+  annotations:
+    kubernetes.io/ingress.class: alb  # Use "nginx" if using Nginx
 spec:
   rules:
-    - host: myapp.example.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: simple-java-app-service
-                port:
-                  number: 80
-
+  - host: myapp.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: simple-java-app-service
+            port:
+              number: 80
