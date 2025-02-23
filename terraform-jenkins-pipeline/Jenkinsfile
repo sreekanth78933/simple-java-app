@@ -16,6 +16,8 @@ pipeline {
         stage('Setup Terraform Backend') {
             steps {
                 dir('backend') {
+                    sh 'pwd'  // Debug: Check current working directory
+                    sh 'ls -la'  // Debug: List all files to check if .tf files exist
                     sh 'terraform init'
                     sh 'terraform apply -auto-approve'
                 }
