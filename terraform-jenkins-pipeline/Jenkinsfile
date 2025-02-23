@@ -2,15 +2,14 @@ pipeline {
     agent any
 
     environment {
-        AWS_ACCESS_KEY_ID     = credentials('aws-access-key')
-        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-key')
-        TF_VAR_key_name       = 'my-key-pair'  
+        AWS_REGION = 'us-east-1'  // Update with your preferred AWS region
+        TF_VAR_key_name = 'rahul'  // Ensure this key pair exists in AWS EC2
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/your-repo.git'  // Replace with actual repo
+                git branch: 'project-7', url: 'https://github.com/sreekanth78933/simple-java-app.git'  // Replace with actual repo
             }
         }
 
@@ -51,7 +50,7 @@ pipeline {
                     sh 'terraform plan -out=tfplan'
                 }
                 dir('ec2') {
-                    sh 'terraform plan -var "public_subnet_id=$(terraform output -raw public_subnet_id)" -out=tfplan'
+                    sh 'terraform plan -var "public_subnet_id=$(terraform -chdir=vpc output -raw public_subnet_id)" -out=tfplan'
                 }
             }
         }
@@ -63,7 +62,7 @@ pipeline {
                     sh 'terraform apply -auto-approve'
                 }
                 dir('ec2') {
-                    sh 'terraform apply -var "public_subnet_id=$(terraform output -raw public_subnet_id)" -auto-approve'
+                    sh 'terraform apply -var "public_subnet_id=$(terraform -chdir=vpc output -raw public_subnet_id)" -auto-approve'
                 }
             }
         }
@@ -86,4 +85,3 @@ pipeline {
         }
     }
 }
-
