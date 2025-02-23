@@ -1,12 +1,13 @@
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "my-terraform-state-bucket-12345"
-  versioning {
-    enabled = true
-  }
-  lifecycle {
-    prevent_destroy = true
-  }
+  bucket = "my-terraform-state-bucket-${random_string.suffix.result}"
 }
+
+resource "random_string" "suffix" {
+  length  = 6
+  special = false
+  upper   = false
+}
+
 
 resource "aws_dynamodb_table" "terraform_locks" {
   name         = "terraform-state-lock"
