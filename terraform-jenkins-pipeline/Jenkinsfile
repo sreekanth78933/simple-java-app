@@ -15,7 +15,7 @@ pipeline {
 
         stage('Setup Terraform Backend') {
             steps {
-                dir('backend') {
+                dir('terraform-jenkins-pipeline/backend') {
                     sh 'pwd'  // Debug: Check current working directory
                     sh 'ls -la'  // Debug: List all files to check if .tf files exist
                     sh 'terraform init'
@@ -26,10 +26,10 @@ pipeline {
 
         stage('Initialize Terraform') {
             steps {
-                dir('vpc') {
+                dir('terraform-jenkins-pipeline/vpc') {
                     sh 'terraform init'
                 }
-                dir('ec2') {
+                dir('terraform-jenkins-pipeline/ec2') {
                     sh 'terraform init'
                 }
             }
@@ -37,10 +37,10 @@ pipeline {
 
         stage('Validate Terraform') {
             steps {
-                dir('vpc') {
+                dir('terraform-jenkins-pipeline/vpc') {
                     sh 'terraform validate'
                 }
-                dir('ec2') {
+                dir('terraform-jenkins-pipeline/ec2') {
                     sh 'terraform validate'
                 }
             }
@@ -48,10 +48,10 @@ pipeline {
 
         stage('Plan Terraform') {
             steps {
-                dir('vpc') {
+                dir('terraform-jenkins-pipeline/vpc') {
                     sh 'terraform plan -out=tfplan'
                 }
-                dir('ec2') {
+                dir('terraform-jenkins-pipeline/ec2') {
                     sh 'terraform plan -var "public_subnet_id=$(terraform -chdir=vpc output -raw public_subnet_id)" -out=tfplan'
                 }
             }
@@ -60,10 +60,10 @@ pipeline {
         stage('Apply Terraform') {
             steps {
                 input message: "Deploy resources to AWS?"
-                dir('vpc') {
+                dir('terraform-jenkins-pipeline/vpc') {
                     sh 'terraform apply -auto-approve'
                 }
-                dir('ec2') {
+                dir('terraform-jenkins-pipeline/ec2') {
                     sh 'terraform apply -var "public_subnet_id=$(terraform -chdir=vpc output -raw public_subnet_id)" -auto-approve'
                 }
             }
@@ -71,10 +71,10 @@ pipeline {
 
         stage('Show Outputs') {
             steps {
-                dir('vpc') {
+                dir('terraform-jenkins-pipeline/vpc') {
                     sh 'terraform output'
                 }
-                dir('ec2') {
+                dir('terraform-jenkins-pipeline/ec2') {
                     sh 'terraform output'
                 }
             }
