@@ -42,8 +42,8 @@
     </build>
     <distributionManagement>
         <repository>
-            <id>nexus-test-releases</id> <!-- Match this ID with the settings.xml -->
-            <url>http://3.93.185.38:8081/repository/maven-fca-private-repo/</url>
+            <id>nexus-releases</id> <!-- Match this ID with the settings.xml -->
+            <url>http://13.48.106.171:8081/repository/maven-jenkins-integration/</url>
         </repository>
     </distributionManagement>
 </project>
