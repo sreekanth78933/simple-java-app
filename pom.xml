@@ -43,7 +43,7 @@
     <distributionManagement>
         <repository>
             <id>nexus-releases</id> <!-- Match this ID with the settings.xml -->
-            <url>http://13.61.185.155:8081/repository/nexus-jenkins-java/</url>
+            <url>http://13.60.213.105:8081/repository/nexus-jenkins-java/</url>
         </repository>
     </distributionManagement>
 </project>
