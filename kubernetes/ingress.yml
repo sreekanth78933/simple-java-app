@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: app-ingress
+  namespace: demo-app
   annotations:
     kubernetes.io/ingress.class: alb  # Use "nginx" if using Nginx ingress controller
 spec:
