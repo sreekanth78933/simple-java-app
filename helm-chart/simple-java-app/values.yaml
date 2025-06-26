@@ -1,0 +1,25 @@
+replicaCount: 3
+
+image:
+  repository: devopstraining064/project4-demo-dockerimage
+  tag: "33"
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 8080
+
+ingress:
+  enabled: true
+  className: alb
+  annotations:
+    kubernetes.io/ingress.class: alb
+  hosts:
+    - host: myapp.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+
+namespace: demo-app
+
